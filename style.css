@@ -1,0 +1,32 @@
+body{
+    margin: 0 auto;
+}
+
+header{
+    text-align: center;
+    background-color: tomato;
+}
+.wraper{
+    display: flex;
+    justify-content: center;
+    
+}
+.content-wrap{
+    display: flex;
+    flex-direction: column;
+    min-width: 600px;
+    
+    text-align: center;
+}
+.form-wrap, .search-bar, .container{
+    margin: 5px;
+    border: 2px solid black;
+}
+
+.form-wrap{
+    padding-bottom: 10px;
+}
+
+.search-bar{
+    padding-bottom: 10px;
+}
