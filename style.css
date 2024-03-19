@@ -20,7 +20,11 @@ header{
 }
 .form-wrap, .search-bar, .container{
     margin: 5px;
-    border: 2px solid black;
+    box-shadow: 0 5px 10px rgba(154, 160, 185, .05), 0 15px 40px rgba(166, 173, 201, .2);
+    border: 1px solid black;
+    background-color: rgb(194, 194, 194);
+    border-radius: 16px;
+
 }
 
 .form-wrap{
@@ -29,4 +33,36 @@ header{
 
 .search-bar{
     padding-bottom: 10px;
+}
+
+.col{
+    display: flex;
+    
+}
+
+.inner {
+    display: flex;
+    flex-direction: column;
+}
+
+.item {
+    border-radius: 16px;
+    margin-top: 16px;
+    padding: 12px 24px 12px 24px;
+    background: white;
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+.item > .inner h2 {
+    margin-top: 0;
+    margin-bottom: unset;
+}
+
+.item > .inner p {
+    margin-top: 5px;
+    margin-bottom: unset;
+}
+.shadow {
+    box-shadow: 0 5px 10px rgba(154, 160, 185, .05), 0 15px 40px rgba(166, 173, 201, .2);
 }
