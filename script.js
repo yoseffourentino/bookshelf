@@ -31,12 +31,12 @@ function generateId() {
     return +new Date();
 }
 
-function generateBookObject(id, tittle, year, writer, isCompleted){
+function generateBookObject(id, title, year, author, isCompleted){
     return{
         id,
-        tittle,
+        title,
         year,
-        writer,
+        author,
         isCompleted
     }
 }
@@ -46,13 +46,13 @@ const RENDER_EVENT = 'render-book';
 
 function makeBook(bookObject){
     const textTitle = document.createElement('h2');
-    textTitle.innerText = bookObject.tittle;
+    textTitle.innerText = bookObject.title;
 
     const textYear = document.createElement('p');
     textYear.innerText = `Tahun: ${bookObject.year}`;
 
     const textWriter = document.createElement('p');
-    textWriter.innerText =`Penulis: ${bookObject.writer}`;
+    textWriter.innerText =`Penulis: ${bookObject.author}`;
 
     const textContainer = document.createElement('div');
     textContainer.classList.add('inner')
