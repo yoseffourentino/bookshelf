@@ -18,8 +18,9 @@ function addBook(){
     const titleInput = document.getElementById('title').value;
     const yearInput = document.getElementById('yearBook').value;
     const writerInput = document.getElementById('writer').value;
+    const isCompleted = document.getElementById('checkBox').checked;
     const generatedId = generateId();
-    const bookObject = generateBookObject(generatedId, titleInput, yearInput, writerInput, false);
+    const bookObject = generateBookObject(generatedId, titleInput, yearInput, writerInput, isCompleted);
     books.push(bookObject);
 
     document.dispatchEvent(new Event(RENDER_EVENT));
@@ -209,14 +210,3 @@ searchFeature.addEventListener("input", function () {
     }
 });
 
-const checkBox = document.getElementById('checkBox');
-checkBox.addEventListener('input', function(){
-    for(const book of books){
-        if(checkBox.setAttribute = 'checked'){
-            book.isCompleted = 'true'
-        }else{
-            book.isCompleted = 'false'
-        }
-    }
-    return;
-})
