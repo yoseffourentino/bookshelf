@@ -1,11 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Arima:wght@100..700&display=swap');
+
 body{
     margin: 0 auto;
+    font-family: 'Arima';
 }
 
 header{
+    margin-top: 0;
     text-align: center;
     background-color: tomato;
 }
+
+header h1{
+    margin-top: 0;
+}
+
 .wraper{
     display: flex;
     justify-content: center;
@@ -13,15 +22,12 @@ header{
 }
 .content-wrap{
     display: flex;
-    flex-direction: column;
-    min-width: 600px;
-    
+    flex-direction: row;
     text-align: center;
 }
 .form-wrap, .search-bar, .container{
     margin: 5px;
     box-shadow: 0 5px 10px rgba(154, 160, 185, .05), 0 15px 40px rgba(166, 173, 201, .2);
-    border: 1px solid black;
     background-color: rgb(194, 194, 194);
     border-radius: 16px;
 
@@ -29,10 +35,27 @@ header{
 
 .form-wrap{
     padding-bottom: 10px;
+    width: 500px;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label{
+    text-align: left;
+    margin-left: 20px;
+}
+
+.form-group input{
+    margin: 0px 20px;
 }
 
 .search-bar{
     padding-bottom: 10px;
+    width: 1012px;
+
 }
 
 .col{
@@ -47,7 +70,7 @@ header{
 
 .item {
     border-radius: 16px;
-    margin-top: 16px;
+    margin: 16px;
     padding: 12px 24px 12px 24px;
     background: white;
     display: flex;
@@ -65,4 +88,67 @@ header{
 }
 .shadow {
     box-shadow: 0 5px 10px rgba(154, 160, 185, .05), 0 15px 40px rgba(166, 173, 201, .2);
+}
+
+.item > .undo-button{
+    padding: 10px 5px;
+    border: 3px solid rgb(82, 221, 214);
+    border-radius: 10px;
+    background-color: white;
+    color: rgb(82, 221, 214);
+    margin-left: auto;
+    cursor: pointer;
+    font-weight: 800;
+    
+}
+
+.item > .undo-button:hover{
+    background-color: rgb(82, 221, 214);
+    color: white;
+}
+
+.item > .check-button{
+    padding: 10px 5px;
+    border: 3px solid rgb(15, 179, 1);
+    border-radius: 10px;
+    background-color: white;
+    color: rgb(15, 179, 1);
+    margin-left: auto;
+    cursor: pointer;
+    font-weight: 800;
+    
+}
+
+.item > .check-button:hover{
+    background-color: rgb(15, 179, 1);
+    color: white;
+}
+
+.item > .trash-button{
+    padding: 10px 5px;
+    border: 3px solid rgb(255, 7, 7);
+    border-radius: 10px;
+    background-color: white;
+    color: rgb(255, 7, 7);
+    margin-left: 16px;
+    cursor: pointer;
+    font-weight: 800;
+    
+}
+
+
+
+.item > .trash-button:hover{
+    background-color: rgb(255, 7, 7);
+    color: white;
+}
+
+.bookshelf-container{
+    display: flex;
+    justify-content: right;
+    
+}
+
+.container{
+    width: 500px;
 }

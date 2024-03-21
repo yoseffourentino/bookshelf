@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', function () {
     event.preventDefault();
     addBook();
     });
+    if (isStorageExist()) {
+        loadDataFromStorage();
+    }
 });
 
 
@@ -12,14 +15,15 @@ const finishedBook = document.getElementById('completed-book');
 
 
 function addBook(){
-const titleInput = document.getElementById('title').value;
-const yearInput = document.getElementById('yearBook').value;
-const writerInput = document.getElementById('writer').value;
-const generatedId = generateId();
-const bookObject = generateBookObject(generatedId, titleInput, yearInput, writerInput, false);
-books.push(bookObject);
+    const titleInput = document.getElementById('title').value;
+    const yearInput = document.getElementById('yearBook').value;
+    const writerInput = document.getElementById('writer').value;
+    const generatedId = generateId();
+    const bookObject = generateBookObject(generatedId, titleInput, yearInput, writerInput, false);
+    books.push(bookObject);
 
-document.dispatchEvent(new Event(RENDER_EVENT));
+    document.dispatchEvent(new Event(RENDER_EVENT));
+    saveData()
 }
 
 function generateId() {
@@ -59,23 +63,32 @@ function makeBook(bookObject){
     container.setAttribute('id', `todo-${bookObject.id}`);
 
     if(bookObject.isCompleted){
-        const undoButton = document.createElement('button');
-        undoButton.classList.add('undo-button');
-
+        const undoButton = document.createElement('i');
+        undoButton.classList.add("fa-solid", "fa-repeat", 'undo-button');
         undoButton.addEventListener('click', function(){
-            undoTaskFromCompleted(bookObject.id);
+            undoBookFromCompleted(bookObject.id);
         });
 
-        const trashButton = document.createElement('button');
-        trashButton.classList.add('trash-button');
+        const trashButton = document.createElement('i');
+        trashButton.classList.add("fa-solid", "fa-trash", 'trash-button');
 
         trashButton.addEventListener('click', function(){
-            trashTaskFromCompleted(bookObject.id);
+            trashBookFromCompleted(bookObject.id);
         })
+
+        container.append(undoButton, trashButton);
+    } else{
+        const checkButton = document.createElement('i');
+        checkButton.classList.add("fa-solid", "fa-circle-check", 'check-button');
+
+        checkButton.addEventListener('click', function(){
+            addBookToComplete(bookObject.id);
+        })
+
+        container.append(checkButton)
     }
 
     return container;
-
 }
 
 document.addEventListener(RENDER_EVENT, function(){
@@ -88,12 +101,122 @@ document.addEventListener(RENDER_EVENT, function(){
     for(const bookItem of books){
         const bookElement = makeBook(bookItem);
         if(!bookItem.isCompleted){
-            unfinishedBookfinishedBook.append(bookElement);
-        }else{
+            unfinishedBook.append(bookElement);
+        }
+        else{
             finishedBook.append(bookElement);
         }
     }
 })
 
+function addBookToComplete(bookId){
+    const bookTarget = findBook(bookId);
+
+    if(bookTarget === null ) return;
+
+    bookTarget.isCompleted = true;
+    document.dispatchEvent(new Event(RENDER_EVENT));
+    saveData()
+}
+
+function findBook(bookId){
+    for(const bookItem of books){
+        if(bookItem.id === bookId){
+            return bookItem;
+        }
+    }
+
+    return null;
+}
+
+function trashBookFromCompleted(bookId) {
+    const bookTarget = findBookIndex(bookId);
+
+    if (bookTarget === -1) return;
+
+    books.splice(bookTarget, 1);
+    document.dispatchEvent(new Event(RENDER_EVENT));
+    saveData()
+}
 
 
+function undoBookFromCompleted(bookId) {
+    const bookTarget = findBook(bookId);
+
+    if (bookTarget == null) return;
+
+    bookTarget.isCompleted = false;
+    document.dispatchEvent(new Event(RENDER_EVENT));
+    saveData()
+}
+
+function findBookIndex(bookId) {
+    for (const index in books) {
+        if (books[index].id === bookId) {
+        return index;
+        }
+    }
+
+    return -1;
+}
+
+function saveData(){
+    if(isStorageExist()){
+        const parsed = JSON.stringify(books);
+        localStorage.setItem(KEY_STORAGE, parsed);
+        document.dispatchEvent(new Event(SAVED_EVENT));
+    }
+}
+
+const SAVED_EVENT = 'saved-books';
+const KEY_STORAGE = 'bookshelf-apps';
+
+function isStorageExist(){
+    if (typeof (Storage) === undefined) {
+        alert('Browser kamu tidak mendukung local storage');
+        return false;
+    }
+    return true;
+}
+
+document.addEventListener(SAVED_EVENT, function(){
+    console.log(localStorage.getItem(KEY_STORAGE))
+});
+
+function loadDataFromStorage(){
+    const getData = localStorage.getItem(KEY_STORAGE);
+    let data = JSON.parse(getData);
+
+    if(data !== null){
+        for(const book of data){
+            books.push(book);
+        }
+    }
+
+    document.dispatchEvent(new Event(RENDER_EVENT));
+}
+
+const searchFeature = document.getElementById("search-feature");
+searchFeature.addEventListener("input", function () {
+    const title = document.getElementById('search-feature').value.toLowerCase();
+    const allBookTitle = document.querySelectorAll('.item >  h2');
+    for (const book of allBookTitle) {
+        if(book.innerText.toLowerCase().includes(title)){
+            book.parentElement.style.display = "block";
+        } else {
+            book.parentElement.style.display = "none";
+        }
+    }
+});
+
+const checkBox = document.getElementById('checkBox');
+checkBox.addEventListener('input', function(){
+    for(const book of books){
+        if(checkBox.setAttribute = 'checked'){
+            book.isCompleted = 'true'
+        }else{
+            book.isCompleted = 'false'
+        }
+    }
+    return;
+})
