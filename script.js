@@ -16,7 +16,7 @@ const finishedBook = document.getElementById('completed-book');
 
 function addBook(){
     const titleInput = document.getElementById('title').value;
-    const yearInput = document.getElementById('yearBook').value;
+    const yearInput = parseInt(document.getElementById('yearBook').value);
     const writerInput = document.getElementById('writer').value;
     const isCompleted = document.getElementById('checkBox').checked;
     const generatedId = generateId();
@@ -86,7 +86,14 @@ function makeBook(bookObject){
             addBookToComplete(bookObject.id);
         })
 
-        container.append(checkButton)
+        const trashButton = document.createElement('i');
+        trashButton.classList.add("fa-solid", "fa-trash", 'trash-button');
+
+        trashButton.addEventListener('click', function(){
+            trashBookFromCompleted(bookObject.id);
+        })
+
+        container.append(checkButton, trashButton)
     }
 
     return container;
