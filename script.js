@@ -199,7 +199,7 @@ function loadDataFromStorage(){
 const searchFeature = document.getElementById("search-feature");
 searchFeature.addEventListener("input", function () {
     const title = document.getElementById('search-feature').value.toLowerCase();
-    const allBookTitle = document.querySelectorAll('.item >  h2');
+    const allBookTitle = document.querySelectorAll('.item > .inner h2');
     for (const book of allBookTitle) {
         if(book.innerText.toLowerCase().includes(title)){
             book.parentElement.style.display = "block";
