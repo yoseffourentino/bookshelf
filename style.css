@@ -3,22 +3,30 @@
 body{
     margin: 0 auto;
     font-family: 'Arima';
+    background-color: rgb(255, 186, 255);
+    height: 100vh;
+    
 }
 
 header{
     margin-top: 0;
     text-align: center;
-    background-color: tomato;
+    background-color: rgb(195, 0, 255);
 }
 
 header h1{
     margin-top: 0;
+    color: beige;
+}
+header p{
+    color: beige;
+    margin-bottom: 0;
 }
 
 .wraper{
     display: flex;
     justify-content: center;
-    
+    margin-top: 20px;
 }
 .content-wrap{
     display: flex;
@@ -28,7 +36,7 @@ header h1{
 .form-wrap, .search-bar, .container{
     margin: 5px;
     box-shadow: 0 5px 10px rgba(154, 160, 185, .05), 0 15px 40px rgba(166, 173, 201, .2);
-    background-color: rgb(194, 194, 194);
+    background-color: rgb(207, 207, 207);
     border-radius: 16px;
 
 }

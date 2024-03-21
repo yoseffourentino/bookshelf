@@ -203,10 +203,12 @@ searchFeature.addEventListener("input", function () {
     const allBookTitle = document.querySelectorAll('.item > .inner h2');
     for (const book of allBookTitle) {
         if(book.innerText.toLowerCase().includes(title)){
-            book.parentElement.style.display = "block";
+            book.parentElement.parentElement.style.display = "block";
         } else {
-            book.parentElement.style.display = "none";
+            book.parentElement.parentElement.style.display = "none";
         }
+        
     }
+    
 });
 
